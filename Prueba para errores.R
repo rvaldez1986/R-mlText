@@ -577,12 +577,12 @@ post_compare = function(data2){
 
 
 #source functions (validate and compare) from files
-source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_act.R")
-source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_ant.R")
+source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_act.R")
+source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_ant.R")
 
 
-VAL1 = fun_validate_ant("BASE ANTERIOR TEVCOL.csv", "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V1")
-VAL2 = fun_validate_act("BASE ACTUAL TEVCOL.csv", "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V1")
+VAL1 = fun_validate_ant("BASE ANTERIOR TEVCOL.csv", "C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2")
+VAL2 = fun_validate_act("BASE ACTUAL TEVCOL.csv", "C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2")
 
 
 
