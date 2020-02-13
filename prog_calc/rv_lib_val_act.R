@@ -146,7 +146,10 @@ fun_validate_act = function(B_ACTUAL, read_dir){
   
   #Chequear duplicados
   if(length(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)) > 0)
-    {stop(paste("Duplicado, lineas: ", toString(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)+1)))}
+  {stop(paste("Duplicado, lineas: ", toString(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)+1)))}
+  
+  #Arreglar orden columnas
+  setcolorder(data2, c(1:10, 12, 11)) #Movemos para que cargo salga al ultimo
   
   newlist = list("data2" = data2)
   

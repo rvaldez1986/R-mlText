@@ -1,10 +1,10 @@
 #No enviar, para pruebas
 
 #source functions (validate and compare) from files
-source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_comp.R")
-source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_act.R")
-source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_ant.R")
-source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/Compare.R")
+source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_comp.R")
+source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_act.R")
+source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_ant.R")
+source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/Compare.R")
 
 #empresa: Nombre de la empresa (String)
 #directorioEntrada: ubicacion bases
@@ -17,8 +17,8 @@ source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog
 
 
 
-comparar("TEVCOL", "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V1", 
+comparar("TEVCOL", "C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2", 
          "BASE ANTERIOR TEVCOL.csv", "BASE ACTUAL TEVCOL.csv", 
-         "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V1/res", "2015.12.31") 
+         "C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2/res", "2015.12.31") 
 
 
