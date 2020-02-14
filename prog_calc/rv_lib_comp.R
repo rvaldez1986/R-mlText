@@ -930,16 +930,25 @@ fun_compare = function(data1, data2, write_dir, empresa, f_calc){
   
   ACTIVOS_ANTIG$ESTADO = trim(paste(c1,c2,c3,c4,c5,c6,c7,c8))
   
+  #Comentarios en Estado, Ingresos
   #Validador con F_Calc
-  
-  sal = (F_Calc - SALIDAS$F_ING)/365.25
+  SUELDO_BAS = 460
   ing = (F_Calc - INGRESOS$F_ING)/365.25
+  c_ing = ifelse(ing >= 1, "Verificar Ingresos (Error en Fecha de Ingreso)", "")
+  c_ing2 = ifelse(INGRESOS$SUELDO_JUB < SUELDO_BAS, "Verificar Ingresos (Error en SUELDO_JUB, menor al basico)", "")
+  c_ing3 = ifelse(INGRESOS$SUELDO_DES < SUELDO_BAS, "Verificar Ingresos (Error en SUELDO_DES, menor al basico)", "")
+  INGRESOS$ESTADO = trim(paste(c_ing, c_ing2, c_ing3))
   
-  c_sal = ifelse(sal >= 20, "Verificar Jub Patronal", "")
-  c_ing = ifelse(ing >= 1, "Verificar Ingresos", "")
   
-  SALIDAS$ESTADO = c_sal
-  INGRESOS$ESTADO = c_ing
+  #Comentarios en Estado y Cambio de Tipo, Salidas
+  #Validador con F_Calc
+  sal = (F_Calc - SALIDAS$F_ING)/365.25
+  c_sal = ifelse(sal >= 20, "Verificar Jub Patronal, (Error en Fecha de Ingreso)", "")
+  c_sal2 = ifelse(SALIDAS$TIPO < 4, "Verificar Jub Patronal, (Error en TIPO)", "")
+  SALIDAS$ESTADO = trim(paste(c_sal,c_sal2))
+  
+  SALIDAS$TIPO = ifelse(SALIDAS$TIPO != 4, SALIDAS$TIPO, 5)  #Cambiar tipo 4 a 5
+  
   
   #Formatear entrega de archivo (fechas, numeros y columna en blanco)
   #Aca hay que chequear si se cambian las columnas!!!!
