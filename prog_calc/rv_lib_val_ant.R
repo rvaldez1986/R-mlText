@@ -103,6 +103,8 @@ fun_validate_ant = function(B_ANTERIOR, read_dir){
     {stop(paste("Error en casilla CC, lineas: ", toString(which(is.null(data1$CC) == TRUE)+1)))}
   
   data1$NOMBRE = gsub("  "," ", gsub("  ", " ", data1$NOMBRE))
+  data1$NOMBRE <- gsub("\240", " ", data1$NOMBRE, fixed = TRUE)
+  data1$NOMBRE <- gsub("\u00A0", " ", data1$NOMBRE, fixed = TRUE)
     
   data1$F_NAC = as.Date(data1$F_NAC, format="%Y.%m.%d")
   

@@ -932,7 +932,7 @@ fun_compare = function(data1, data2, write_dir, empresa, f_calc){
   
   #Comentarios en Estado, Ingresos
   #Validador con F_Calc
-  SUELDO_BAS = 460
+  SUELDO_BAS = 460   #DATO 2019, ESTE PARAMETRO DEBE SER ACTUALIZADO CADA ANIO
   ing = (F_Calc - INGRESOS$F_ING)/365.25
   c_ing = ifelse(ing >= 1, "Verificar Ingresos (Error en Fecha de Ingreso)", "")
   c_ing2 = ifelse(INGRESOS$SUELDO_JUB < SUELDO_BAS, "Verificar Ingresos (Error en SUELDO_JUB, menor al basico)", "")

@@ -102,6 +102,8 @@ fun_validate_act = function(B_ACTUAL, read_dir){
     {stop(paste("Error en casilla CC, lineas: ", toString(which(is.null(data2$CC) == TRUE)+1)))}
   
   data2$NOMBRE = gsub("  "," ", gsub("  ", " ", data2$NOMBRE))
+  data2$NOMBRE <- gsub("\240", " ", data2$NOMBRE, fixed = TRUE)
+  data2$NOMBRE <- gsub("\u00A0", " ", data2$NOMBRE, fixed = TRUE)
   
   data2$F_NAC = as.Date(data2$F_NAC, format="%Y.%m.%d")
   if(length(which(is.na(data2$F_NAC) == TRUE)) > 0)
