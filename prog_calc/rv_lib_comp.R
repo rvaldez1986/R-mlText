@@ -251,11 +251,17 @@ cedulaCompare = function(Nueva, Vieja){
     Nueva.Cedula = Nueva$CEDULA[i]
     
     v = vector()
-    
-    v = smartCompare(rep(Nueva.Cedula, n2), Vieja$CEDULA
-                     ,rep(Nueva.Nombre, n2), Vieja$NOMBRE)
-    
+    v = simpleCompare(Nueva.Cedula,Vieja$CEDULA,Nueva.Nombre,Vieja$NOMBRE)
     m = max(v)
+    
+    if(m != 1){
+      
+      v = smartCompare(rep(Nueva.Cedula, n2), Vieja$CEDULA
+                       ,rep(Nueva.Nombre, n2), Vieja$NOMBRE)
+      m = max(v)
+    }
+    
+   
     p = ifelse(m > 0, which(v == m)[1], "Entrada")
     
     if(p != "Entrada"){
