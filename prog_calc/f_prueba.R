@@ -1,10 +1,10 @@
 #No enviar, para pruebas
 
 #source functions (validate and compare) from files
-source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_comp.R")
-source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_act.R")
-source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_ant.R")
-source("C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/Compare.R")
+source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_comp.R")
+source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_act.R")
+source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/rv_lib_val_ant.R")
+source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog_calc/Compare.R")
 
 #empresa: Nombre de la empresa (String)
 #directorioEntrada: ubicacion bases
