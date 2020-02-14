@@ -17,10 +17,6 @@ source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog
 
 
 
-comparar("ALES", "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V1", 
-         "BASE ANTERIOR ALES.csv", "BASE ACTUAL ALES.csv", 
-         "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V1/res", "2015.12.31") 
-
-
-CHINA WATER
-ROSADO
+comparar("TEVCOL", "C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2", 
+         "BASE ANTERIOR TEVCOL.csv", "BASE ACTUAL TEVCOL.csv", 
+         "C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2/res", "2015.12.31") 

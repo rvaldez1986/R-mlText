@@ -84,15 +84,15 @@ fun_validate_act = function(B_ACTUAL, read_dir){
   
   data2 = read.csv(B_ACTUAL, sep=",")
   
-  if(ncol(data2) != 11)
+  if(ncol(data2) != 12)
     {stop(sprintf("Error en numero de columnas"))}
   
-  if(length(which((colnames(data2) == c("N","CC","NOMBRE","SEXO","F_NAC","F_ING","F_DES","SUELDO_JUB","SUELDO_DES","TIPO","CEDULA")) == FALSE)) > 0)
+  if(length(which((colnames(data2) == c("N","CC","NOMBRE","SEXO","F_NAC","F_ING","F_DES","SUELDO_JUB","SUELDO_DES","TIPO","CEDULA","CARGO")) == FALSE)) > 0)
     {stop(sprintf("Error en nombre de columnas"))}
   
   data2 = depur1(data2)
   
-  if(ncol(data2) != 11)
+  if(ncol(data2) != 12)
   {stop(sprintf("Error existe por lo menos una columna sin datos en ninguna fila, llene por lo menos 1 fila con valores"))}
   
   if(length(which(is.na(data2$NOMBRE) == TRUE)) > 0)
@@ -146,7 +146,10 @@ fun_validate_act = function(B_ACTUAL, read_dir){
   
   #Chequear duplicados
   if(length(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)) > 0)
-    {stop(paste("Duplicado, lineas: ", toString(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)+1)))}
+  {stop(paste("Duplicado, lineas: ", toString(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)+1)))}
+  
+  #Arreglar orden columnas
+  setcolorder(data2, c(1:10, 12, 11)) #Movemos para que cargo salga al ultimo
   
   newlist = list("data2" = data2)
   
