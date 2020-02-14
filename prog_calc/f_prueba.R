@@ -21,3 +21,4 @@ comparar("CHINA WATER", "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/
          "BASE ANTERIOR CHINA WATER.csv", "BASE ACTUAL CHINA WATER.csv", 
          "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2/res", "2015.12.31") 
 proc.time() - ptm
+
