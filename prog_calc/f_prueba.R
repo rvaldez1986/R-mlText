@@ -16,7 +16,8 @@ source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog
 
 
 
-
-comparar("TEVCOL", "C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2", 
-         "BASE ANTERIOR TEVCOL.csv", "BASE ACTUAL TEVCOL.csv", 
-         "C:/Users/rober/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2/res", "2015.12.31") 
+ptm <- proc.time()
+comparar("CHINA WATER", "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2", 
+         "BASE ANTERIOR CHINA WATER.csv", "BASE ACTUAL CHINA WATER.csv", 
+         "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2/res", "2015.12.31") 
+proc.time() - ptm
