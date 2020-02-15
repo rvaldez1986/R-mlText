@@ -233,17 +233,17 @@ cedulaCompare = function(Nueva, Vieja){
   Vieja = Vieja[,ESTADO := "NA"]                         #CHEQ
   M = Vieja[-c(1:nrow(Vieja)), ]
   
-  n1 = nrow(Nueva); c1 = ncol(Nueva)  #c1 = 12
-  n2 = nrow(Vieja); c2 = ncol(Vieja)  #c2 = 14
+  n1 = nrow(Nueva); c1 = ncol(Nueva)  #c1 = 13
+  n2 = nrow(Vieja); c2 = ncol(Vieja)  #c2 = 15
   
   #Esto se debe actualizar si se eliminan o se incluyen columnas
-  #colnames de nueva = N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA,CARGO (12)
-  #colnames de vieja = N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA,RESERVA_JUB,RESERVA_DES,ESTADO(14)
+  #colnames de nueva = N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA.O,CEDULA,CARGO (13)
+  #colnames de vieja = N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA.O,CEDULA,RESERVA_JUB,RESERVA_DES,ESTADO(15)
   #M, mismas columnas que vieja, esta data va a almacenar los comparados
   
   M2 = rbind(M, list(0, 0, "Entrada", "Entrada", as.Date(0, origin = "1900-01-01"),
                      as.Date(0, origin = "1900-01-01"), as.Date(0, origin = "1900-01-01"),
-                     0, 0,0,"Entrada", 0, 0, "Entrada")) #Mismas columnas que vieja,esta se incluye si es entrada,sino se coloca el correspondiente de vieja          
+                     0, 0,0,"Entrada","Entrada", 0, 0, "Entrada")) #Mismas columnas que vieja,esta se incluye si es entrada,sino se coloca el correspondiente de vieja          
   
   for(i in 1:n1){
     
@@ -280,18 +280,19 @@ cedulaCompare = function(Nueva, Vieja){
   
   #Esto se debe actualizar si se eliminan o se incluyen columnas
   #esto solo cambia para cuando se hace el cbind no tengan el mismo nombre las columnas
+  #M es vieja
   
   M = rename(M, c("N"="N2", "CC" = "CC2", "NOMBRE"="NOMBRE2", "SEXO"="SEXO2",
                   "F_NAC"="F_NAC2", "F_ING" = "F_ING2", "F_DES" = "F_DES2", 
-                  "SUELDO_JUB"="SUELDO_JUB2","SUELDO_DES"="SUELDO_DES2", "TIPO" = "TIPO2", "CEDULA"="CEDULA2"))
+                  "SUELDO_JUB"="SUELDO_JUB2","SUELDO_DES"="SUELDO_DES2", "TIPO" = "TIPO2", "CEDULA.O"="CEDULA.O2" , "CEDULA"="CEDULA2"))
   
-  COMP = cbind(Nueva, M) #tiene 26 columnas, 1:12 nueva, 13:26 viejas
+  COMP = cbind(Nueva, M) #tiene 28 columnas, 1:13 nueva, 14:28 viejas
   
   ACT_ANT = COMP[ NOMBRE2 != "Entrada" ]
   INGRESOS = COMP[ NOMBRE2 == "Entrada" ]
   #Esto se debe actualizar si se cambian columnas, COMP que tiene todas las columnas nos quedamos solo
   #con las correspondientes a NUEVA
-  INGRESOS = INGRESOS[, !c(13:26), with=FALSE]         
+  INGRESOS = INGRESOS[, !c(14:28), with=FALSE]         
   SALIDAS = Vieja[ !(N %in% ACT_ANT$N2) ]  #esta parte de la vieja, asi que no hay que quitar columnas
   
   COUNT = ACT_ANT[,.N,by = "NOMBRE2"]
@@ -315,13 +316,13 @@ noCedulaCompare = function(Nueva, Vieja, Type){
   n2 = nrow(Vieja); c2 = ncol(Vieja)
   
   #Esto se debe actualizar si se eliminan o se incluyen columnas
-  #colnames de nueva = N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA
-  #colnames de vieja = N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA,RESERVA_JUB,RESERVA_DES,ESTADO
+  #colnames de nueva = N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA.O,CEDULA,CARGO (13)
+  #colnames de vieja = N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA.O,CEDULA,RESERVA_JUB,RESERVA_DES,ESTADO(15)
   #M, mismas columnas que vieja, esta data va a almacenar los comparados
   
   M2 = rbind(M, list(0, 0, "Entrada", "Entrada", as.Date(0, origin = "1900-01-01"),
                      as.Date(0, origin = "1900-01-01"), as.Date(0, origin = "1900-01-01"),
-                     0,0, 0,"Entrada", 0, 0, "Entrada"))
+                     0,0, 0,"Entrada","Entrada", 0, 0, "Entrada"))
   
   for(i in 1:n1){
     
@@ -369,15 +370,16 @@ noCedulaCompare = function(Nueva, Vieja, Type){
   
   M = rename(M, c("N"="N2", "CC" = "CC2", "NOMBRE"="NOMBRE2", "SEXO"="SEXO2",
                   "F_NAC"="F_NAC2", "F_ING" = "F_ING2", "F_DES" = "F_DES2", 
-                  "SUELDO_JUB"="SUELDO_JUB2", "SUELDO_DES"="SUELDO_DES2", "TIPO" = "TIPO2", "CEDULA"="CEDULA2"))
+                  "SUELDO_JUB"="SUELDO_JUB2", "SUELDO_DES"="SUELDO_DES2", "TIPO" = "TIPO2",
+                  "CEDULA.O"="CEDULA.O2", "CEDULA"="CEDULA2"))
   
-  COMP = cbind(Nueva, M)   #tiene 26 columnas, 1:12 nueva, 13:26 viejas
+  COMP = cbind(Nueva, M)   #tiene 28 columnas, 1:13 nueva, 14:28 viejas
   
   ACT_ANT = COMP[ NOMBRE2 != "Entrada" ]
   INGRESOS = COMP[ NOMBRE2 == "Entrada" ]
   #Esto se debe actualizar si se cambian columnas, COMP que tiene todas las columnas nos quedamos solo
   #con las correspondientes a NUEVA
-  INGRESOS = INGRESOS[, !c(13:26), with=FALSE]
+  INGRESOS = INGRESOS[, !c(14:28), with=FALSE]
   SALIDAS = Vieja[ !(N %in% ACT_ANT$N2) ]
   
   COUNT = ACT_ANT[,.N,by = "NOMBRE2"]
@@ -395,21 +397,22 @@ noCedulaCompare = function(Nueva, Vieja, Type){
 post_compare = function(data2){
   
   #Corre si UNSURE tiene al menos 1 registro
-  #UNSURE, tiene 27 columnas
-  #Nuevas & Viejas & ESTADO
+  #data2, tiene 28 columnas
+  #Nuevas & Viejas
   
   data2 = data2[order(-NOMBRE2, decreasing=TRUE),]
   group = data2[,.(COUNT = length(N)), by = "NOMBRE2"]
   data3 = merge(data2, group, by = "NOMBRE2")
   
-  #data3 tiene 27 columnas, 26 anteriores + count; NOMBRE2 primera
+  #data3 tiene 29 columnas, 28 anteriores + count; NOMBRE2 primera
   #la columna 1 se vuelve NOMBRE2, la base esta desarreglada
   #Aca hay que verificar si se cambian numero de columnas, con el sig. comando se pone a NOMBRE2 en su puesto
   
-  #data3 = NOMBRE2,N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA,CARGO,N2,CC2,SEXO2,
-  #F_NAC2,F_ING2,F_DES2,SUELDO_JUB2,SUELDO_DES2,TIPO2,CEDULA2,RESERVA_JUB,RESERVA_DES,ESTADO,COUNT
+  #data3 = NOMBRE2, N,CC,NOMBRE,SEXO,F_NAC,F_ING,F_DES,SUELDO_JUB,SUELDO_DES,TIPO,CEDULA.O,CEDULA,CARGO,
+  #N2,CC2,SEXO2,F_NAC2,F_ING2,F_DES2,SUELDO_JUB2,SUELDO_DES2,TIPO2,CEDULA.O2,CEDULA2,RESERVA_JUB,
+  #RESERVA_DES,ESTADO,COUNT
   
-  setcolorder(data3, c( 2:15, 1, 16:27)) #Ponerle a NOMBRE2 en su puesto
+  setcolorder(data3, c( 2:16, 1, 17:29)) #Ponerle a NOMBRE2 en su puesto
   
   data3$PNAMESjac3r = stringsim(data2$NOMBRE, data2$NOMBRE2, method = 'jaccard', q = 3) 
   data3$PNAMESlcsr = stringsim(data2$NOMBRE, data2$NOMBRE2, method = 'lcs')
@@ -424,14 +427,14 @@ post_compare = function(data2){
   #Modelo para count = 1
   if(n3.1 > 0){
     
-    #3.1 tiene las mismas 26 columnas en su correcto orden + 1 que se llama count y 2 mas, jac3 y lcs
-    #en total 29
+    #3.1 tiene las mismas 28 columnas en su correcto orden + 1 que se llama count y 2 mas, jac3 y lcs
+    #en total 31
     
     #se modifica la variable estado (no se incluye una nueva!!)
     data3.1$ESTADO = ifelse(data3.1$PNAMESlcsr > 0.93, "ACT_ANT", "SALIDA")
     
-    #Aca hay que verificar el numero de columnas, se selecciona en este caso las 26 (no se incluye count ni las dos extras)
-    data4 = data3.1[, 1:26, with = FALSE]
+    #Aca hay que verificar el numero de columnas, se selecciona en este caso las 28 (no se incluye count ni las dos extras)
+    data4 = data3.1[, 1:28, with = FALSE]
     
     ACT_ANT1 = subset(data4, data4$ESTADO == "ACT_ANT")
     INGRESOS1 = subset(data4, data4$ESTADO == "INGRESO")                       
@@ -443,8 +446,8 @@ post_compare = function(data2){
   #Modelo para count = 2
   if(n3.2 > 0){
     
-    #3.2 tiene las mismas 26 columnas en su correcto orden + 1 que se llama count y 2 mas, jac3 y lcs
-    #en total 29
+    #3.2 tiene las mismas 28 columnas en su correcto orden + 1 que se llama count y 2 mas, jac3 y lcs
+    #en total 31
     
     data3.2.2 = data3.2[,.(COUNT = length(N), j3rmax = max(PNAMESjac3r)), by = "NOMBRE2"]
     a1 = data3.2$NOMBRE[seq(1, n3.2, 2)]
@@ -458,24 +461,25 @@ post_compare = function(data2){
                               , "ACT_ANT", "Unsure")
     
     data4 = merge(data3, data3.2.2[, .(NOMBRE2, j3rmax, fitted)], by = "NOMBRE2")
-    #la variable data4, NOMBRE2 esta como primera variable y tiene las 29 anteriores
-    #mas j3rmax y fitted, en total 31
+    #la variable data4, NOMBRE2 esta como primera variable y tiene las 31 anteriores
+    #mas j3rmax y fitted, en total 33
     
     #data4 = NOMBRE2 , N , CC , NOMBRE , SEXO , F_NAC , F_ING , F_DES , SUELDO_JUB , SUELDO_DES ,
-    #TIPO , CEDULA , CARGO N2 , CC2 , SEXO2, F_NAC2 , F_ING2 , F_DES2 , SUELDO_JUB2 , SUELDO_DES2 , 
-    #TIPO2 , CEDULA2 , RESERVA_JUB , RESERVA_DES , ESTADO , COUNT , PNAMESjac3r , PNAMESlcsr, j3rmax, fitted
+    #TIPO , CEDULA.O, CEDULA , CARGO N2 , CC2 , SEXO2, F_NAC2 , F_ING2 , F_DES2 , SUELDO_JUB2 , SUELDO_DES2 , 
+    #TIPO2 , CEDULA.O2 , CEDULA2 ,RESERVA_JUB , RESERVA_DES , ESTADO , COUNT , PNAMESjac3r , PNAMESlcsr, 
+    #j3rmax, fitted
     
     #Aca se debe modificar si se altera el numero de columnas
     #Les ponemos en orden, poniendo a NOMBRE2 en su puesto, y luego las adicionales 
-    setcolorder(data4, c( 2:15, 1, 16:31))
+    setcolorder(data4, c( 2:16, 1, 17:33))
     
     data4$ESTADO = ifelse(data4$fitted == "ACT_ANT",
                           ifelse(data4$j3rmax == data4$PNAMESjac3r, "ACT_ANT", "INGRESO"),
                           data4$fitted)
     
     #Aca se debe modificar si se altera el numero de columnas
-    #se selecciona las primeras 26 columnas
-    data5 = data4[, 1:26, with = FALSE]
+    #se selecciona las primeras 28 columnas, no COUNT NI EL RESTO
+    data5 = data4[, 1:28, with = FALSE]
     
     ACT_ANT2 = subset(data5, data5$ESTADO == "ACT_ANT")
     INGRESOS2 = subset(data5, data5$ESTADO == "INGRESO")  
@@ -487,14 +491,14 @@ post_compare = function(data2){
   #Estado para count > 2
   if(n3.3 > 0){
     
-    #3.3 tiene las mismas 25 columnas en su correcto orden +1 que se llama count y 2 mas, jac3 y lcs
-    #en total 28
+    #3.3 tiene las mismas 28 columnas en su correcto orden +1 que se llama count y 2 mas, jac3 y lcs
+    #en total 31
     
     data3.3$ESTADO = "UNSURE"
     
     #Aca se debe modificar si se altera el numero de columnas
-    #se selecciona las primeras 26 columnas
-    data4 = data3.3[, 1:26, with = FALSE]
+    #se selecciona las primeras 28 columnas
+    data4 = data3.3[, 1:28, with = FALSE]
     
     ACT_ANT3 = subset(data4, data4$ESTADO == "ACT_ANT")
     INGRESOS3 = subset(data4, data4$ESTADO == "INGRESO")  
@@ -555,27 +559,27 @@ post_compare = function(data2){
   #SALIDASp tiene 26 columnas y asi no esta en las otras instancias, hay que arreglar
   
   #SALIDASp = N , CC , NOMBRE , SEXO , F_NAC , F_ING , F_DES , SUELDO_JUB , SUELDO_DES ,
-  #TIPO , CEDULA , CARGO, N2 , CC2 , NOMBRE2 , SEXO2, F_NAC2 , F_ING2 , F_DES2 , SUELDO_JUB2 , SUELDO_DES2 , 
-  #TIPO2 , CEDULA2 , RESERVA_JUB , RESERVA_DES , ESTADO 
+  #TIPO , CEDULA.O, CEDULA , CARGO, N2 , CC2 , NOMBRE2 , SEXO2, F_NAC2 , F_ING2 , F_DES2 , SUELDO_JUB2 , SUELDO_DES2 , 
+  #TIPO2 , CEDULA.O2, CEDULA2 , RESERVA_JUB , RESERVA_DES , ESTADO 
   
   
   
   #Aca hay que modificar si se alteran las columnas, elegimos las siguientes 
-  SALIDAS = SALIDASp[, 13:26, with = FALSE]
+  SALIDAS = SALIDASp[, 14:28, with = FALSE]
   #cambiamos los nombres (para que no diga 2)
   #Estan asi:
   
   #N2 , CC2 , NOMBRE2 , SEXO2, F_NAC2 , F_ING2 , F_DES2 , SUELDO_JUB2 , SUELDO_DES2 , 
-  #TIPO2 , CEDULA2 , RESERVA_JUB , RESERVA_DES , ESTADO
+  #TIPO2 , CEDULA.02, CEDULA2, RESERVA_JUB , RESERVA_DES , ESTADO
   
   #colnames como deberia ser SALIDAS = N , CC , NOMBRE , SEXO , F_NAC , F_ING , F_DES,
   #SUELDO_JUB , SUELDO_DES , TIPO , CEDULA , RESERVA_JUB , RESERVA_DES , ESTADO 
   
-  setnames(SALIDAS, colnames(ACT_ANTp)[c(1:11, 24:26)] )  #cogiendo de ACT_ANTp o SALIDASp, DA LO MISMO
+  setnames(SALIDAS, colnames(ACT_ANTp)[c(1:12, 26:28)] )  #cogiendo de ACT_ANTp o SALIDASp, DA LO MISMO
   
   #Aca hay que modificar si se alteran las columnas, elegimos las siguientes
-  INGRESOSp1 = INGRESOSp[, 1:12, with = FALSE]
-  INGRESOSp2 = SALIDASp[, 1:12, with = FALSE]
+  INGRESOSp1 = INGRESOSp[, 1:13, with = FALSE]
+  INGRESOSp2 = SALIDASp[, 1:13, with = FALSE]
   
   newList = list("ACT_ANT" = ACT_ANTp, "INGRESOS" = rbind(INGRESOSp1,INGRESOSp2),
                  "SALIDAS" = SALIDAS, "UNSURE" = UNSUREp)
@@ -917,10 +921,9 @@ fun_compare = function(data1, data2, write_dir, empresa, f_calc){
   c3 = ifelse(ACTIVOS_ANTIG$F_NAC != ACTIVOS_ANTIG$F_NAC2, "Corregir F_NAC", "")
   c4 = ifelse(ACTIVOS_ANTIG$F_ING != ACTIVOS_ANTIG$F_ING2, "Corregir F_ING", "")
   c5 = ifelse(ACTIVOS_ANTIG$F_DES != ACTIVOS_ANTIG$F_DES2, "Corregir F_DES", "")
-  c6 = ifelse(is.na(ACTIVOS_ANTIG$CEDULA),
-              ifelse(is.na(ACTIVOS_ANTIG$CEDULA2),"","Corregir Cedula"),
-              ifelse(is.na(ACTIVOS_ANTIG$CEDULA2),"Corregir Cedula",
-                     ifelse(ACTIVOS_ANTIG$CEDULA != ACTIVOS_ANTIG$CEDULA2, "Corregir Cedula", "")))
+  
+  c6 = ifelse(is.na(ACTIVOS_ANTIG$CEDULA)|is.na(ACTIVOS_ANTIG$CEDULA2), "Corregir Cedula",
+              ifelse(ACTIVOS_ANTIG$CEDULA != ACTIVOS_ANTIG$CEDULA2, "Corregir Cedula", ""))
   
   c7 = ifelse(is.na(DIF_JUB)|is.na(PERC_JUB), "Corregir Sueldo Jubilacion", ifelse(DIF_JUB > 400 & PERC_JUB > 0.4, "Corregir Sueldo Jubilacion",
                                                                 ifelse(DIF_JUB < -200 & PERC_JUB < -0.2, "Corregir Sueldo Jubilacion", "")))
@@ -954,23 +957,28 @@ fun_compare = function(data1, data2, write_dir, empresa, f_calc){
   #Aca hay que chequear si se cambian las columnas!!!!
   
   #ACTIVOS_ANTIG = N , CC , NOMBRE , SEXO , F_NAC , F_ING , F_DES , SUELDO_JUB , SUELDO_DES ,
-  #TIPO , CEDULA , CARGO, N2 , CC2 , NOMBRE2 , SEXO2, F_NAC2 , F_ING2 , F_DES2 , SUELDO_JUB2 , SUELDO_DES2 , 
-  #TIPO2 , CEDULA2 , RESERVA_JUB , RESERVA_DES , ESTADO 
+  #TIPO , CEDULA.O, CEDULA , CARGO, N2 , CC2 , NOMBRE2 , SEXO2, F_NAC2 , F_ING2 , F_DES2 , SUELDO_JUB2 , SUELDO_DES2 , 
+  #TIPO2 , CEDULA.O2,CEDULA2 , RESERVA_JUB , RESERVA_DES , ESTADO 
   
-  setcolorder(ACTIVOS_ANTIG, c(13:25, 1:12, 26)) #Movemos viejos primero, nuevos despues
+  setcolorder(ACTIVOS_ANTIG, c(14:27, 1:13, 28)) #Movemos viejos primero, nuevos despues
   b1 = rep(" ", nrow(ACTIVOS_ANTIG)) #Ingresar columna de espacios en blanco
   ACTIVOS_ANTIG$SEP = b1
   
   #ACTIVOS_ANTIG = N2 , CC2 , NOMBRE2 , SEXO2, F_NAC2 , F_ING2 , F_DES2 , SUELDO_JUB2 , SUELDO_DES2 , 
-  #TIPO2 , CEDULA2 , RESERVA_JUB , RESERVA_DES , N , CC , NOMBRE , SEXO , F_NAC , F_ING , F_DES , 
-  #SUELDO_JUB , SUELDO_DES , TIPO , CEDULA , CARGO, ESTADO, SEP
+  #TIPO2 , CEDULA.O2, CEDULA2 , RESERVA_JUB , RESERVA_DES , N , CC , NOMBRE , SEXO , F_NAC , F_ING , F_DES , 
+  #SUELDO_JUB , SUELDO_DES , TIPO , CEDULA.O,CEDULA , CARGO, ESTADO, SEP
   
-  setcolorder(ACTIVOS_ANTIG, c(1:13,27,14:26))
+  setcolorder(ACTIVOS_ANTIG, c(1:14,29,15:28))
   
-  setcolorder(UNSURE, c(13:25, 1:12, 26))
+  setcolorder(UNSURE, c(14:27, 1:13, 28))
   b2 = rep(" ", nrow(UNSURE)) #Ingresar columna de espacios en blanco
   UNSURE$SEP = b2
-  setcolorder(UNSURE, c(1:13,27,14:26))
+  setcolorder(UNSURE, c(1:14,29,15:28))
+  
+  #Por ahora borramos cedula validada, nos quedamos solo con la original
+  ACTIVOS_ANTIG$CEDULA = NULL
+  ACTIVOS_ANTIG$CEDULA2 = NULL
+  ACTIVOS_ANTIG = rename(ACTIVOS_ANTIG, c("CEDULA.O" = "CEDULA","CEDULA.O2"="CEDULA2"))
   
   ACTIVOS_ANTIG$F_NAC = format(ACTIVOS_ANTIG$F_NAC, "%Y.%m.%d") 
   ACTIVOS_ANTIG$F_ING = format(ACTIVOS_ANTIG$F_ING, "%Y.%m.%d") 
