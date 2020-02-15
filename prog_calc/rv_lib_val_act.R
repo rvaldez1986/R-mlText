@@ -143,15 +143,23 @@ fun_validate_act = function(B_ACTUAL, read_dir){
                           ifelse(Validacion22 == "correcta",
                                  data2$CEDULA2, NA))
   
-  data2$CEDULA = NULL ; data2$CEDULA2 = NULL
-  data2 = rename(data2, c("CEDULA.C"="CEDULA"))
+  data2$CEDULA2 = NULL
+  data2 = rename(data2, c("CEDULA" = "CEDULA.O","CEDULA.C"="CEDULA"))
+  
+  
+  
   
   #Chequear duplicados
   if(length(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)) > 0)
   {stop(paste("Duplicado, lineas: ", toString(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)+1)))}
   
   #Arreglar orden columnas
-  setcolorder(data2, c(1:10, 12, 11)) #Movemos para que cargo salga al ultimo
+  #Estan asi:
+  #N	CC	NOMBRE	SEXO	F_NAC	F_ING	F_DES	SUELDO_JUB	SUELDO_DES	TIPO	CEDULA.O	CARGO CEDULA
+  
+  setcolorder(data2, c(1:11, 13, 12)) #Movemos para que cargo salga al ultimo
+  
+  #N	CC	NOMBRE	SEXO	F_NAC	F_ING	F_DES	SUELDO_JUB	SUELDO_DES	TIPO	CEDULA.O	CEDULA CARGO
   
   newlist = list("data2" = data2)
   

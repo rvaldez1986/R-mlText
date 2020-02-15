@@ -150,14 +150,13 @@ fun_validate_ant = function(B_ANTERIOR, read_dir){
                           ifelse(Validacion12 == "correcta",
                                  data1$CEDULA2,NA))
   
-  data1$CEDULA = NULL ; data1$CEDULA2 = NULL 
-  data1 = rename(data1, c("CEDULA.C"="CEDULA"))
-  
-  #data1 = N , CC , NOMBRE , SEXO , F_NAC , F_ING , F_DES , SUELDO_JUB , SUELDO_DES , TIPO , 
-  #RESERVA_JUB , RESERVA_DES , CEDULA
-  
-  #Chequear columnas, modificar si cambia el n??mero de columnas
-  data1 = data1[,c(1:10,13,11:12)]
+  data1$CEDULA2 = NULL 
+  data1 = rename(data1, c("CEDULA" = "CEDULA.O","CEDULA.C"="CEDULA"))
+ 
+  #Chequear columnas, modificar si cambia el n??mero de columnas, ESTA ASI:
+  #N	CC	NOMBRE	SEXO	F_NAC	F_ING	F_DES	SUELDO_JUB	SUELDO_DES	TIPO	CEDULA.o	RESERVA_JUB	RESERVA_DES CEDULA
+  data1 = data1[,c(1:11,14,12:13)]
+  #N	CC	NOMBRE	SEXO	F_NAC	F_ING	F_DES	SUELDO_JUB	SUELDO_DES	TIPO	CEDULA.o CEDULA	RESERVA_JUB	RESERVA_DES
   
   #Chequear duplicados
   if(length(which(duplicated(data1[,c("NOMBRE","F_NAC")]) == TRUE)) > 0)
