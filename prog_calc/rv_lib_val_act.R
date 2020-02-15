@@ -146,9 +146,6 @@ fun_validate_act = function(B_ACTUAL, read_dir){
   data2$CEDULA2 = NULL
   data2 = rename(data2, c("CEDULA" = "CEDULA.O","CEDULA.C"="CEDULA"))
   
-  
-  
-  
   #Chequear duplicados
   if(length(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)) > 0)
   {stop(paste("Duplicado, lineas: ", toString(which(duplicated(data2[,c("NOMBRE","F_NAC")]) == TRUE)+1)))}
