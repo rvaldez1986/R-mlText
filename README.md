@@ -1,7 +1,7 @@
 # R-mlText
 R based probabilistic database merger algorithm
 
-* Highly decreases the human effort needed in database construction for actuarial cal-culations.
+* Highly decreases the human effort needed in database construction for actuarial calculations.
 * 2 years since deployment, has performed more than a million calculations.
 
 
