@@ -29,7 +29,7 @@ dim(data2)
 head(data2)
 head(data1)
 
-  
+
 f_calc = "2016.12.31"
 F_Calc = as.Date(f_calc, format="%Y.%m.%d")
   

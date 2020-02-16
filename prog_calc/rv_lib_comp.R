@@ -922,8 +922,10 @@ fun_compare = function(data1, data2, write_dir, empresa, f_calc){
   c4 = ifelse(ACTIVOS_ANTIG$F_ING != ACTIVOS_ANTIG$F_ING2, "Corregir F_ING", "")
   c5 = ifelse(ACTIVOS_ANTIG$F_DES != ACTIVOS_ANTIG$F_DES2, "Corregir F_DES", "")
   
-  c6 = ifelse(is.na(ACTIVOS_ANTIG$CEDULA)|is.na(ACTIVOS_ANTIG$CEDULA2), "Corregir Cedula",
-              ifelse(ACTIVOS_ANTIG$CEDULA != ACTIVOS_ANTIG$CEDULA2, "Corregir Cedula", ""))
+  c6a = ifelse(is.na(ACTIVOS_ANTIG$CEDULA), "Corregir Cedula Nueva", "")
+  c6b = ifelse(is.na(ACTIVOS_ANTIG$CEDULA2), "Corregir Cedula Anterior (CEDULA2)", "")
+  c6c = ifelse(!is.na(ACTIVOS_ANTIG$CEDULA)&&!is.na(ACTIVOS_ANTIG$CEDULA2)&&(ACTIVOS_ANTIG$CEDULA!=ACTIVOS_ANTIG$CEDULA2), "Corregir cedulas diferentes", "")
+  
   
   c7 = ifelse(is.na(DIF_JUB)|is.na(PERC_JUB), "Corregir Sueldo Jubilacion", ifelse(DIF_JUB > 400 & PERC_JUB > 0.4, "Corregir Sueldo Jubilacion",
                                                                 ifelse(DIF_JUB < -200 & PERC_JUB < -0.2, "Corregir Sueldo Jubilacion", "")))
@@ -931,7 +933,7 @@ fun_compare = function(data1, data2, write_dir, empresa, f_calc){
   c8 = ifelse(is.na(DIF_DES)|is.na(PERC_DES), "Corregir Sueldo Desahucio", ifelse(DIF_DES > 400 & PERC_DES > 0.4, "Corregir Sueldo Desahucio",
                                                                         ifelse(DIF_DES < -200 & PERC_DES < -0.2, "Corregir Sueldo Desahucio", "")))
   
-  ACTIVOS_ANTIG$ESTADO = trim(paste(c1,c2,c3,c4,c5,c6,c7,c8))
+  ACTIVOS_ANTIG$ESTADO = trim(paste(c1,c2,c3,c4,c5,c6a,c6b,c6c,c7,c8))
   
   #Comentarios en Estado, Ingresos
   #Validador con F_Calc
@@ -940,7 +942,8 @@ fun_compare = function(data1, data2, write_dir, empresa, f_calc){
   c_ing = ifelse(ing >= 1, "Verificar Ingresos (Error en Fecha de Ingreso)", "")
   c_ing2 = ifelse(INGRESOS$SUELDO_JUB < SUELDO_BAS, "Verificar Ingresos (Error en SUELDO_JUB, menor al basico)", "")
   c_ing3 = ifelse(INGRESOS$SUELDO_DES < SUELDO_BAS, "Verificar Ingresos (Error en SUELDO_DES, menor al basico)", "")
-  INGRESOS$ESTADO = trim(paste(c_ing, c_ing2, c_ing3))
+  c_ing4 = ifelse(is.na(INGRESOS$CEDULA), "Corregir Cedula", "")
+  INGRESOS$ESTADO = trim(paste(c_ing, c_ing2, c_ing3, c_ing4))
   
   
   #Comentarios en Estado y Cambio de Tipo, Salidas
