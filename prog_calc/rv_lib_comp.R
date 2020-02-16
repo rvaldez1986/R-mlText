@@ -980,6 +980,14 @@ fun_compare = function(data1, data2, write_dir, empresa, f_calc){
   ACTIVOS_ANTIG$CEDULA2 = NULL
   ACTIVOS_ANTIG = rename(ACTIVOS_ANTIG, c("CEDULA.O" = "CEDULA","CEDULA.O2"="CEDULA2"))
   
+  INGRESOS$CEDULA = NULL
+  INGRESOS = rename(INGRESOS, c("CEDULA.O" = "CEDULA"))
+  
+  SALIDAS$CEDULA = NULL
+  SALIDAS = rename(SALIDAS, c("CEDULA.O" = "CEDULA"))
+  
+  
+  
   ACTIVOS_ANTIG$F_NAC = format(ACTIVOS_ANTIG$F_NAC, "%Y.%m.%d") 
   ACTIVOS_ANTIG$F_ING = format(ACTIVOS_ANTIG$F_ING, "%Y.%m.%d") 
   ACTIVOS_ANTIG$F_DES = format(ACTIVOS_ANTIG$F_DES, "%Y.%m.%d")
