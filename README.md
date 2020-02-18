@@ -7,7 +7,7 @@ R based probabilistic database merger algorithm
 
 This program contains:
 
-* Data for fitting models at at [BD_pruebas](https://github.com/rvaldez1986/R-mlText/BD_pruebas/).
+* Data for fitting models at at [BD_pruebas](https://github.com/rvaldez1986/R-mlText/tree/master/BD_pruebas).
 
 
 
