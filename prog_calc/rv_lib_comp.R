@@ -219,12 +219,17 @@ simpleCompare = function(v1,v2,v3,v4){
   #v1 y v2 nombres, v3 y v4 son fechas de nacimiento!!
   
   dname = ifelse(v1 == v2, 1, 0)
-  dfnac = ifelse(v3 == v4, 1, 0)
-  
-  r1 = ifelse(dname + dfnac == 2, 1, -2)
-  
-  return(r1)
-  
+  if(max(dname)==1){
+    dfnac = ifelse(v3 == v4, 1, 0)
+    if(max(dfnac)==1){
+      r1 = ifelse(dname + dfnac == 2, 1, -2)
+      return(r1)
+    }else{
+      return(rep(-2,length(dname)))
+    }
+  }else{
+    return(rep(-2,length(dname)))
+  }
 }
 
 cedulaCompare = function(Nueva, Vieja){

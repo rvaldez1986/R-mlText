@@ -17,8 +17,9 @@ source("C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/prog
 
 
 ptm <- proc.time()
-comparar("TEVCOL", "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2", 
-         "BASE ANTERIOR TEVCOL.csv", "BASE ACTUAL TEVCOL.csv", 
+comparar("ROSADO", "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V2", 
+         "BASE ANTERIOR ROSADO.csv", "BASE ACTUAL ROSADO.csv", 
          "C:/Users/rober/OneDrive/Documentos/ACTUARIA/act-remote/r_comparador/BD_pruebas/V4/res", "2015.12.31") 
 proc.time() - ptm
 
+#271.38 
