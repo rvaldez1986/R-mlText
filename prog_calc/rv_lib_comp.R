@@ -216,7 +216,8 @@ smartCompare2 = function(v1,v2,v3,v4){
 
 simpleCompare = function(v1,v2,v3,v4){
   
-  #v1 y v2 nombres, v3 y v4 son fechas de nacimiento!!
+  #v1 y v2 nombres, v3 y v4 son vectores
+  #optimizado para realizar solo las operaciones necesarias
   
   dname = ifelse(v1 == v2, 1, 0)
   if(max(dname)==1){
@@ -955,7 +956,9 @@ fun_compare = function(data1, data2, write_dir, empresa, f_calc){
   #Validador con F_Calc
   sal = (F_Calc - SALIDAS$F_ING)/365.25
   c_sal = ifelse(sal >= 20, "Verificar Jub Patronal, (Error en Fecha de Ingreso)", "")
-  c_sal2 = ifelse(SALIDAS$TIPO < 4, "Verificar Jub Patronal, (Error en TIPO)", "")
+  c_sal2 = ifelse(SALIDAS$TIPO < 4, 
+                  ifelse(SALIDAS$TIPO < 2, "Verificar salida de jubilado pendiente o jubilado (TIPO)", 
+                         "Verificar salida de empleado con derecho a jubilación patronal (TIPO)"), "")
   SALIDAS$ESTADO = trim(paste(c_sal,c_sal2))
   
   SALIDAS$TIPO = ifelse(SALIDAS$TIPO != 4, SALIDAS$TIPO, 5)  #Cambiar tipo 4 a 5
